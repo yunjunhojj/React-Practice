@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext, useState } from "react";
+import { Card } from "./components/Card";
+import { AdminFlagContext } from "./components/providers/AdminFlagProvider";
 
-function App() {
+const App = () => {
+  // 관리자 플래그
+  const { isAdmin, setIsAdmin } = useContext(AdminFlagContext);
+  // 전환 클릭시 실행
+  const onClickSwitch = () => {
+    setIsAdmin(!isAdmin);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {isAdmin ? <span> 관리자 입니다. </span> : <span> 관리자 아닙니다.</span>}
+      <button onClick={onClickSwitch}> 전환 </button>
+      <Card isAdmin={isAdmin} />
     </div>
   );
-}
+};
 
 export default App;
